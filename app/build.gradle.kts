@@ -84,4 +84,6 @@ dependencies {
     androidTestImplementation(libs.androidx.room.testing)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
+
+    implementation(libs.androidx.navigation.compose)
 }

@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
     // 插入单个用户
-    // 插入单个用户
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
@@ -42,4 +41,7 @@ interface UserDao {
     // 登录验证
     @Query("SELECT * FROM users WHERE userId = :userId AND password = :password")
     suspend fun login(userId: String, password: String): User?
+
+    @Query("SELECT * FROM users WHERE userId = :userId")
+    fun getUserByIdFlow(userId: String): Flow<User?>
 }

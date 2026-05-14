@@ -40,4 +40,7 @@ interface ReserveDao {
     // 查询某个志愿者接的所有预约
     @Query("SELECT * FROM reserves WHERE volunteerUserId = :volunteerUserId ORDER BY createTime DESC")
     fun getReservesByVolunteer(volunteerUserId: String): Flow<List<Reserve>>
+
+    @Query("SELECT * FROM reserves WHERE reserveId = :reserveId")
+    fun getReserveByIdFlow(reserveId: String): Flow<Reserve?>
 }
