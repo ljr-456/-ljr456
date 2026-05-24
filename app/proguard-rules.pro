@@ -24,4 +24,3 @@
 -keep class com.baidu.** { *; }
 -keep class vi.com.gdi.** { *; }
 -dontwarn com.baidu.**
--dontwarn vi.com.gdi.**

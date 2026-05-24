@@ -2,6 +2,8 @@ package com.example.bigwork.ui.screens
 
 import android.Manifest
 import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -92,6 +94,18 @@ fun RunningScreen(
     var showCompleteDialog by remember { mutableStateOf(false) }
     var finalTime by remember { mutableStateOf("") }
     var finalDistance by remember { mutableStateOf("") }
+
+    // 定位权限
+    var pendingStart by remember { mutableStateOf(false) }
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { granted ->
+        if (granted.values.all { it }) {
+            isRunning = true
+            isPaused = false
+        }
+        pendingStart = false
+    }
 
     val fusedClient = remember { LocationServices.getFusedLocationProviderClient(context) }
     val locationCallback = remember {
@@ -273,7 +287,19 @@ fun RunningScreen(
             } else {
                 // 开始跑步
                 Button(
-                    onClick = { isRunning = true },
+                    onClick = {
+                        val fineOk = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                        val coarseOk = ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                        if (fineOk && coarseOk) {
+                            isRunning = true
+                            isPaused = false
+                        } else {
+                            pendingStart = true
+                            locationPermissionLauncher.launch(
+                                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+                            )
+                        }
+                    },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(24.dp)

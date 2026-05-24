@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -31,9 +32,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -54,21 +52,18 @@ import java.util.UUID
 @Composable
 fun CreateReserveScreen(
     navController: NavController,
-    userId: String,
-    viewModel: MainViewModel = viewModel()
+    userId: String
 ) {
-    val selectedLocation by viewModel.selectedMapLocation.collectAsStateWithLifecycle()
+    val activity = LocalActivity.current!!
+    val viewModel: MainViewModel = viewModel(activity)
+    val selectedMapLocation by viewModel.selectedMapLocation.collectAsStateWithLifecycle()
+    val draftTime by viewModel.draftReserveTime.collectAsStateWithLifecycle()
+    val draftAddress by viewModel.draftDetailAddress.collectAsStateWithLifecycle()
+    val draftRemark by viewModel.draftRemark.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
-    var reserveTime by remember { mutableStateOf("") }
-    var detailAddress by remember { mutableStateOf("") }
-    var remark by remember { mutableStateOf("") }
-    var locationName by remember { mutableStateOf("") }
-
-    // 从地图选点返回后同步
-    if (selectedLocation != null && locationName.isEmpty()) {
-        locationName = selectedLocation!!.address
-    }
+    // 位置名称直接取自上一次地图选点结果（ViewModel 中持久保留）
+    val locationName = selectedMapLocation?.address ?: ""
 
     val cal = Calendar.getInstance()
     val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
@@ -117,7 +112,7 @@ fun CreateReserveScreen(
                                             context,
                                             { _, hour, minute ->
                                                 cal.set(year, month, day, hour, minute, 0)
-                                                reserveTime = dateFormat.format(cal.time)
+                                                viewModel.updateDraftReserveTime(dateFormat.format(cal.time))
                                             },
                                             cal.get(Calendar.HOUR_OF_DAY),
                                             cal.get(Calendar.MINUTE),
@@ -134,9 +129,9 @@ fun CreateReserveScreen(
                         Icon(Icons.Default.DateRange, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = reserveTime.ifBlank { "点击选择日期和时间" },
+                            text = draftTime.ifBlank { "点击选择日期和时间" },
                             style = MaterialTheme.typography.bodyLarge,
-                            color = if (reserveTime.isBlank())
+                            color = if (draftTime.isBlank())
                                 MaterialTheme.colorScheme.onSurfaceVariant
                             else
                                 MaterialTheme.colorScheme.onSurface
@@ -183,8 +178,8 @@ fun CreateReserveScreen(
 
             // 详细地址
             OutlinedTextField(
-                value = detailAddress,
-                onValueChange = { detailAddress = it },
+                value = draftAddress,
+                onValueChange = { viewModel.updateDraftDetailAddress(it) },
                 label = { Text("详细地址（门牌号、楼层等）") },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
@@ -195,8 +190,8 @@ fun CreateReserveScreen(
 
             // 特殊要求
             OutlinedTextField(
-                value = remark,
-                onValueChange = { remark = it },
+                value = draftRemark,
+                onValueChange = { viewModel.updateDraftRemark(it) },
                 label = { Text("特殊要求（选填）") },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
@@ -209,31 +204,31 @@ fun CreateReserveScreen(
             // 提交按钮
             Button(
                 onClick = {
-                    val time = reserveTime.ifBlank {
+                    val time = draftTime.ifBlank {
                         dateFormat.format(Calendar.getInstance().time)
                     }
-                    val loc = selectedLocation
+                    val loc = selectedMapLocation
                     val reserve = Reserve(
                         reserveId = UUID.randomUUID().toString(),
                         blindUserId = userId,
                         volunteerUserId = null,
                         area = locationName.ifBlank { "未指定" },
-                        detailAddress = detailAddress,
+                        detailAddress = draftAddress,
                         latitude = loc?.latitude ?: 0.0,
                         longitude = loc?.longitude ?: 0.0,
-                        remark = remark.ifBlank { "无特殊要求" },
+                        remark = draftRemark.ifBlank { "无特殊要求" },
                         status = 0,
                         createTime = time
                     )
                     viewModel.createReserve(reserve)
-                    viewModel.clearSelectedLocation()
+                    viewModel.clearDraft()
                     navController.popBackStack()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
                 shape = RoundedCornerShape(12.dp),
-                enabled = locationName.isNotBlank() || reserveTime.isNotBlank()
+                enabled = locationName.isNotBlank() || draftTime.isNotBlank()
             ) {
                 Text("确认发起预约")
             }

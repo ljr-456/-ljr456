@@ -88,7 +88,8 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
 
-    // 百度地图SDK（地图、定位、搜索）
+    // 百度地图SDK — 请从 https://lbsyun.baidu.com/ 下载SDK，将 .jar 和 .so 文件放入 app/libs/ 目录
+    // 下载时需要勾选：地图SDK、定位SDK、搜索SDK
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     // Google Play Services 定位（跑步时实时位置追踪）
     implementation("com.google.android.gms:play-services-location:21.3.0")

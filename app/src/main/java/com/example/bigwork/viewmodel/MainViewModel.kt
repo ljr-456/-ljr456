@@ -62,6 +62,27 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
 
+    // ==================== 预约草稿状态（跨导航保留） ====================
+    private val _draftReserveTime = MutableStateFlow("")
+    val draftReserveTime: StateFlow<String> = _draftReserveTime.asStateFlow()
+
+    private val _draftDetailAddress = MutableStateFlow("")
+    val draftDetailAddress: StateFlow<String> = _draftDetailAddress.asStateFlow()
+
+    private val _draftRemark = MutableStateFlow("")
+    val draftRemark: StateFlow<String> = _draftRemark.asStateFlow()
+
+    fun updateDraftReserveTime(time: String) { _draftReserveTime.value = time }
+    fun updateDraftDetailAddress(address: String) { _draftDetailAddress.value = address }
+    fun updateDraftRemark(remark: String) { _draftRemark.value = remark }
+
+    fun clearDraft() {
+        _draftReserveTime.value = ""
+        _draftDetailAddress.value = ""
+        _draftRemark.value = ""
+        _selectedMapLocation.value = null
+    }
+
     // ==================== 初始化 ====================
     init {
         loadData()

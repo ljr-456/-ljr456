@@ -8,7 +8,12 @@
       "Read(//e/edge/BaiduLBS_Android_4195 \\(1\\)/**)",
       "Bash(cp \"E:/edge/BaiduLBS_Android_4195 \\(1\\)/libs/BaiduLBS_Android.jar\" \"e:/android project/bigWork/app/libs/\")",
       "Bash(mkdir -p 'e:/android project/bigWork/app/src/main/jniLibs/__TRACKED_VAR__')",
-      "Bash(cp 'E:/edge/BaiduLBS_Android_4195 \\(1\\)/libs/__TRACKED_VAR__/*.so' 'e:/android project/bigWork/app/src/main/jniLibs/__TRACKED_VAR__/')"
+      "Bash(cp 'E:/edge/BaiduLBS_Android_4195 \\(1\\)/libs/__TRACKED_VAR__/*.so' 'e:/android project/bigWork/app/src/main/jniLibs/__TRACKED_VAR__/')",
+      "Bash(mkdir -p 'e:/android project/bigWork/app/libs/__TRACKED_VAR__')",
+      "Bash(cp 'e:/android project/bigWork/app/src/main/jniLibs/__TRACKED_VAR__/*.so' 'e:/android project/bigWork/app/libs/__TRACKED_VAR__/')",
+      "Bash(./gradlew clean *)",
+      "Bash(ls -la \"E:/edge/BaiduLBS_Android_4195/libs/\")",
+      "Read(//e/edge/BaiduLBS_Android_4195/libs/**)"
     ],
     "additionalDirectories": [
       "E:\\edge\\BaiduLBS_Android_4195 (1)\\libs"
