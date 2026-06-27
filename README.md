@@ -118,3 +118,35 @@ bigWork/
 # 3. 构建并安装 Android 客户端
 ./gradlew :app:assembleDebug
 ```
+
+## 运行截图
+登录界面
+
+<img width="1264" height="2780" alt="390e13ebb21e0a43fab1419c5a3fe187" src="https://github.com/user-attachments/assets/12a033a6-427d-4f30-9a37-eb30844aed09" />
+
+盲人端界面
+
+<img width="1264" height="2780" alt="7a0413da1432cff22d10d0f4dd9444c2" src="https://github.com/user-attachments/assets/02ea14ee-84ee-4078-8102-4f5044b071f9" />
+
+发布预约界面
+
+<img width="1264" height="2780" alt="6f8694d1055390ccee4329495a784ad5" src="https://github.com/user-attachments/assets/56717fa2-8a34-4f8b-b8f7-d11d7c15ea5c" />
+
+志愿者端界面
+
+<img width="1080" height="1920" alt="bb1918cd114c859b61a8e7e40c58e8b6" src="https://github.com/user-attachments/assets/c37cdd0a-b4e8-4cd4-bf87-79b9bfafdf04" />
+
+跑步界面
+
+<img width="220" height="452" alt="48163b949439f3e53659ebd56a50a4ae" src="https://github.com/user-attachments/assets/9b276131-64ab-4f69-9b1a-35aaa4444d6c" />
+
+
+
+## 仓库链接
+https://github.com/ljr-456/-ljr456/edit/main/README.md
+
+## 视频链接
+链接: https://pan.baidu.com/s/13f9EuNbuN9aa2IQ5or99_g?pwd=yx7n 提取码: yx7n
+
+## apk文件链接
+链接: https://pan.baidu.com/s/1A7kKjDYo7cGhKXU6afbH5g?pwd=ztnf 提取码: ztnf
