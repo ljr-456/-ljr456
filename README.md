@@ -122,19 +122,19 @@ bigWork/
 ## 运行截图
 登录界面
 
-<img width="1264" height="2780" alt="390e13ebb21e0a43fab1419c5a3fe187" src="https://github.com/user-attachments/assets/12a033a6-427d-4f30-9a37-eb30844aed09" />
+<img width="220" height="480" alt="390e13ebb21e0a43fab1419c5a3fe187" src="https://github.com/user-attachments/assets/12a033a6-427d-4f30-9a37-eb30844aed09" />
 
 盲人端界面
 
-<img width="1264" height="2780" alt="7a0413da1432cff22d10d0f4dd9444c2" src="https://github.com/user-attachments/assets/02ea14ee-84ee-4078-8102-4f5044b071f9" />
+<img width="220" height="480" alt="7a0413da1432cff22d10d0f4dd9444c2" src="https://github.com/user-attachments/assets/02ea14ee-84ee-4078-8102-4f5044b071f9" />
 
 发布预约界面
 
-<img width="1264" height="2780" alt="6f8694d1055390ccee4329495a784ad5" src="https://github.com/user-attachments/assets/56717fa2-8a34-4f8b-b8f7-d11d7c15ea5c" />
+<img width="220" height="480" alt="6f8694d1055390ccee4329495a784ad5" src="https://github.com/user-attachments/assets/56717fa2-8a34-4f8b-b8f7-d11d7c15ea5c" />
 
 志愿者端界面
 
-<img width="1080" height="1920" alt="bb1918cd114c859b61a8e7e40c58e8b6" src="https://github.com/user-attachments/assets/c37cdd0a-b4e8-4cd4-bf87-79b9bfafdf04" />
+<img width="220" height="480" alt="bb1918cd114c859b61a8e7e40c58e8b6" src="https://github.com/user-attachments/assets/c37cdd0a-b4e8-4cd4-bf87-79b9bfafdf04" />
 
 跑步界面
 
