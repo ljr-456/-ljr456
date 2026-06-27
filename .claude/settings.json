@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/YANCHENG/**)",
+      "Bash(ls \"C:\\\\Users\\\\YANCHENG\\\\\\\\.gradle\\\\\\\\hs_err_pid*.log\")",
+      "Bash(ls \"C:\\\\Users\\\\YANCHENG\\\\\\\\.gradle\\\\\\\\daemon\\\\\\\\9.3.1\\\\\\\\hs_err_pid*.log\")"
+    ]
+  }
+}
